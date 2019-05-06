@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find turtlebot_stage)/launch/turtlebot_in_stage.launch"/>
+  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard" name="teleop_twist_keyboard.py" output="log" />  
+  <include file="$(find turtlebot_highlevel_controller)/launch/turtlebot_highlevel_controller.launch"/>
+</launch>
