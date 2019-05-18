@@ -8,7 +8,7 @@
   <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro -->
 
   <!-- Name of the map to use (without path nor extension) and initial position -->
-  <arg name="world_file"     default=" $(env TURTLEBOT_STAGE_WORLD_FILE)"/>
+  <arg name="world_file"     default="$(find turtlebot_highlevel_controller)/maps/piller.world"/>
 
   <param name="/use_sim_time" value="true"/>
   <!--  ******************** Stage ********************  -->
