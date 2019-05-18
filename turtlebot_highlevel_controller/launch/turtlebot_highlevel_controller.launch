@@ -1,4 +1,10 @@
 <launch>
+  <!-- In Stage -->
+  <include file="$(find turtlebot_stage)/launch/turtlebot_in_stage.launch">
+    <arg name="world_file" value="$(find turtlebot_highlevel_controller)/maps/piller.world"/>
+    <arg name="map_file" value="$(find turtlebot_highlevel_controller)/maps/piller.yaml"/>
+  </include>
+
   <node pkg="turtlebot_highlevel_controller" type="turtlebot_highlevel_controller" name="turtlebot_highlevel_controller" output="screen">
     <rosparam command="load" file="$(find turtlebot_highlevel_controller)/config/default.yaml" />
   </node>
