@@ -1,6 +1,7 @@
 #include "turtlebot_highlevel_controller/TurtlebotHighlevelController.hpp"
 #include <string>
 #include <visualization_msgs/Marker.h>
+#include <math.h>
 
 namespace turtlebot_highlevel_controller {
 
@@ -29,7 +30,7 @@ bool TurtlebotHighlevelController::readParameters()
   return true;
 }
 
-void TurtlebotHighlevelController::placeMarker()
+void TurtlebotHighlevelController::placeMarker(float angle, float dist)
 {
   uint32_t shape = visualization_msgs::Marker::CUBE;
   visualization_msgs::Marker marker;
@@ -39,16 +40,16 @@ void TurtlebotHighlevelController::placeMarker()
   marker.id = 0;
   marker.type = shape;
   marker.action = visualization_msgs::Marker::ADD;
-  marker.pose.position.x = 5.0;
-  marker.pose.position.y = 0.0;
+  marker.pose.position.x = cos(angle) * dist;
+  marker.pose.position.y = sin(angle) * dist;
   marker.pose.position.z = 0.0;
   marker.pose.orientation.x = 0.0;
   marker.pose.orientation.y = 0.0;
   marker.pose.orientation.z = 0.0;
   marker.pose.orientation.w = 1.0;
-  marker.scale.x = 1.0;
-  marker.scale.y = 1.0;
-  marker.scale.z = 1.0;
+  marker.scale.x = 0.4;
+  marker.scale.y = 0.4;
+  marker.scale.z = 0.4;
   marker.color.r = 0.0f;
   marker.color.g = 1.0f;
   marker.color.b = 0.0f;
@@ -69,7 +70,7 @@ void TurtlebotHighlevelController::topicCallback(const sensor_msgs::LaserScan& m
 
 
 
-/*
+
   float min_element = message.range_max;
   int min_index = 0;
   for(int i = 0; i < ranges.size(); i++)
@@ -97,7 +98,9 @@ void TurtlebotHighlevelController::topicCallback(const sensor_msgs::LaserScan& m
   msg.angular.y = 0.0;
   msg.angular.z = angle_in_rad;
   this->publisher_.publish(msg);
-*/
+
+  placeMarker(angle_in_rad, min_element);
+
 /*
   geometry_msgs::TransformStamped transformStamped;
   try {

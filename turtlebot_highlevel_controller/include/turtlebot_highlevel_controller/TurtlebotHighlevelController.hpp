@@ -21,7 +21,7 @@ class TurtlebotHighlevelController
 
  private:
   bool readParameters();
-  void placeMarker();
+  void placeMarker(float angle, float dist);
   void topicCallback(const sensor_msgs::LaserScan& message);
 
   ros::NodeHandle& nodeHandle_;
