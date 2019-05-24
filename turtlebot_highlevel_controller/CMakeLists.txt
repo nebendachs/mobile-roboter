@@ -4,6 +4,7 @@ project(turtlebot_highlevel_controller)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
+  tf2_ros
 )
 
 catkin_package(
