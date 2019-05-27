@@ -2,17 +2,17 @@
 
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
-#include "turtlebot_highlevel_controller/TransportMessage.h"
+#include <turtlebot_highlevel_controller/TransportMessage.h>
 #include <string>
 #include <math.h>
 
 namespace turtlebot_highlevel_controller {
 
-class TurtlebotHighlevelProcessing
+class TurtlebotWallDetection
 {
  public:
-  TurtlebotHighlevelProcessing(ros::NodeHandle& nodeHandle);
-  virtual ~TurtlebotHighlevelProcessing();
+  TurtlebotWallDetection(ros::NodeHandle& nodeHandle);
+  virtual ~TurtlebotWallDetection();
 
  private:
   bool readParameters();
