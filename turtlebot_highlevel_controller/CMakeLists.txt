@@ -7,18 +7,26 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_ros
   std_msgs
   geometry_msgs
+  genmsg
+  actionlib
+  actionlib_msgs
   message_generation
 )
 
-add_message_files(
+add_action_files(
+  DIRECTORY 
+    action 
   FILES
-  TransportMessage.msg
+    ReachTarget.action
 )
 
 generate_messages(
   DEPENDENCIES
-  std_msgs
-  geometry_msgs
+    std_msgs
+    sensor_msgs
+    geometry_msgs
+    actionlib
+    actionlib_msgs
 )
 
 catkin_package(
@@ -26,7 +34,10 @@ catkin_package(
     include
   CATKIN_DEPENDS
     roscpp
+    std_msgs
     sensor_msgs
+    geometry_msgs
+    actionlib_msgs
     message_runtime
 )
 
@@ -51,11 +62,7 @@ add_executable(turtlebot_highlevel_movement
 
 
 add_dependencies(turtlebot_highlevel_processing
-  ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
-)
-
-add_dependencies(turtlebot_highlevel_movement
-  ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
+  ${catkin_EXPORTED_TARGETS}
 )
 
 

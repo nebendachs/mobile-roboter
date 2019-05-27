@@ -1,77 +1,41 @@
 #include "turtlebot_highlevel_controller/TurtlebotHighlevelProcessing.hpp"
 
-
 namespace turtlebot_highlevel_controller {
 
-TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(ros::NodeHandle& nodeHandle)
-    : nodeHandle_(nodeHandle)
+TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(std::string actionName, bool flag)
 {
-  if (!readParameters()) {
-    ROS_ERROR("Could not read parameters.");
-    ros::requestShutdown();
+  actionlib::SimpleActionClient<turtlebot_highlevel_controller::ReachTargetAction> client(actionName, flag);
+  ROS_INFO("Successfully launched client.");
+  ROS_INFO("Wait for Server...");
+  client.waitForServer();
+  turtlebot_highlevel_controller::ReachTargetGoal goal;
+
+  goal.move.linear.x = 0.0;
+  goal.move.linear.y = 0.0;
+  goal.move.linear.z = 0.0;
+  goal.move.angular.x = 0.0;
+  goal.move.angular.y = 0.0;
+  goal.move.angular.z = 0.0;
+
+  goal.marker_pose.position.x = 0.0;
+  goal.marker_pose.position.y = 0.0;
+  goal.marker_pose.position.z = 0.0;
+  goal.marker_pose.orientation.x = 0.0;
+  goal.marker_pose.orientation.y = 0.0;
+  goal.marker_pose.orientation.z = 0.0;
+
+  client.sendGoal(goal);
+  client.waitForResult(ros::Duration(5.0));
+
+  if (client.getState() == actionlib::SimpleClientGoalState::SUCCEEDED) {
+    ROS_INFO("Reached goal.");
+  } else {
+    printf("Current State: %s\n", client.getState().toString().c_str());
   }
-  subscriber_ = nodeHandle_.subscribe(subscriberTopic_, this->queueSize_, &TurtlebotHighlevelProcessing::topicCallback, this);
-  transportPublisher_ = nodeHandle_.advertise<turtlebot_highlevel_controller::TransportMessage>(transportTopic_, 1);
-  message_sequence_id_ = 0;
-  ROS_INFO("Successfully launched node.");
 }
 
 TurtlebotHighlevelProcessing::~TurtlebotHighlevelProcessing()
 {
-}
-
-bool TurtlebotHighlevelProcessing::readParameters()
-{
-  if (!nodeHandle_.getParam("subsciber_topic", subscriberTopic_)) return false;
-  if (!nodeHandle_.getParam("transport_topic", transportTopic_)) return false;
-  if (!nodeHandle_.getParam("queue_size", queueSize_)) return false;
-  return true;
-}
-
-void TurtlebotHighlevelProcessing::topicCallback(const sensor_msgs::LaserScan& message)
-{
-  std::vector<float> ranges = message.ranges;
-
-  float min_element = message.range_max;
-  int min_index = 0;
-  for(int i = 0; i < ranges.size(); i++)
-  {
-    if(ranges[i] < min_element)
-    {
-      min_element = ranges[i];
-      min_index = i;
-    }
-  }
-
-  float angle = message.angle_min + min_index * message.angle_increment;
-
-  turtlebot_highlevel_controller::TransportMessage msg;
-
-  msg.header.seq = this->message_sequence_id_;
-  msg.header.stamp = ros::Time(0);
-  msg.header.frame_id = "base_laser_link";
-
-  if (min_element < 5.0) {
-    msg.move.linear.x = 0.1;
-  } else {
-    msg.move.linear.x = 0.0;
-  }
-
-  msg.move.linear.y = 0.0;
-  msg.move.linear.z = 0.0;
-  msg.move.angular.x = 0.0;
-  msg.move.angular.y = 0.0;
-  msg.move.angular.z = angle;
-
-  msg.marker_pose.position.x = cos(angle) * min_element;
-  msg.marker_pose.position.y = sin(angle) * min_element;
-  msg.marker_pose.position.z = 0.0;
-  msg.marker_pose.orientation.x = 0.0;
-  msg.marker_pose.orientation.y = 0.0;
-  msg.marker_pose.orientation.z = 0.0;
-
-  transportPublisher_.publish(msg);
-  this->message_sequence_id_ += 1;
 }
 
 }
