@@ -2,17 +2,17 @@
 
 namespace turtlebot_highlevel_controller {
 
-TurtlebotHighlevelMovement::TurtlebotHighlevelMovement(ros::NodeHandle& nodeHandle)
-    : nodeHandle_(nodeHandle), tfListener_(tfBuffer_)
+TurtlebotHighlevelMovement::TurtlebotHighlevelMovement(std::string actionName)
+    : as_(nodeHandle_, actionName, boost::bind(&TurtlebotHighlevelMovement::execute, this, _1), false), actionName_(actionName)
 {
   if (!readParameters()) {
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
-  subscriber_ = nodeHandle_.subscribe(subscriberTopic_, 1, &TurtlebotHighlevelMovement::topicCallback, this);
   movementPublisher_ = nodeHandle_.advertise<geometry_msgs::Twist>(movementTopic_, 1);
   markerPublisher_ = nodeHandle_.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-  ROS_INFO("Successfully launched node.");
+  as_.start();
+  ROS_INFO("Successfully launched server.");
 }
 
 TurtlebotHighlevelMovement::~TurtlebotHighlevelMovement()
@@ -21,9 +21,13 @@ TurtlebotHighlevelMovement::~TurtlebotHighlevelMovement()
 
 bool TurtlebotHighlevelMovement::readParameters()
 {
-  if (!nodeHandle_.getParam("transport_topic", subscriberTopic_)) return false;
   if (!nodeHandle_.getParam("movement_topic", movementTopic_)) return false;
   return true;
+}
+
+void TurtlebotHighlevelMovement::execute(const turtlebot_highlevel_controller::ReachTargetGoalConstPtr& goal)
+{
+  as_.setSucceeded();
 }
 
 void TurtlebotHighlevelMovement::moveRobot(float lx, float ly, float lz, float ax, float ay, float az)
@@ -64,35 +68,6 @@ void TurtlebotHighlevelMovement::placeMarker(std::string frame_id, float x, floa
   marker.color.a = 1.0;
   marker.lifetime = ros::Duration();
   markerPublisher_.publish(marker);
-}
-
-void TurtlebotHighlevelMovement::topicCallback(const turtlebot_highlevel_controller::TransportMessage& message)
-{
-  float lx = message.move.linear.x;
-	float ly = message.move.linear.y;
-	float lz = message.move.linear.z;
-	float ax = message.move.angular.x;
-	float ay = message.move.angular.y;
-	float az = message.move.angular.z;
-
-  float x = message.marker_pose.position.x;
-  float y = message.marker_pose.position.y;
-  float z = message.marker_pose.position.z;
-	std::string tf_frame = message.header.frame_id;
-
-  this->moveRobot(lx, ly, lz, ax, ay, az);
-
-  geometry_msgs::TransformStamped transform;
-  tf2::Stamped<tf2::Transform> tf2;
-  tf2::Vector3 point(x, y, z);
-  try {
-    transform = tfBuffer_.lookupTransform("odom", tf_frame, ros::Time(0));
-    tf2::convert(transform, tf2);
-    tf2::Vector3 new_point = tf2 * point;
-    placeMarker("odom", new_point[0], new_point[1], new_point[2]);
-  } catch (tf2::TransformException &exception) {
-    ROS_WARN("%s", exception.what());
-  }
 }
 
 }
