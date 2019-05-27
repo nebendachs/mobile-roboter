@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   tf2_ros
   std_msgs
+  geometry_msgs
   message_generation
 )
 
