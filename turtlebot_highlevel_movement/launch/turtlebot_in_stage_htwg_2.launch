@@ -13,8 +13,8 @@
   <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro -->
 
   <!-- Name of the map to use (without path nor extension) and initial position -->
-  <arg name="world_file" value="$(find turtlebot_highlevel_controller)/maps/piller.world"/>
-  <arg name="map_file" value="$(find turtlebot_highlevel_controller)/maps/piller.yaml"/>
+  <arg name="world_file" value="$(find turtlebot_highlevel_movement)/maps/piller.world"/>
+  <arg name="map_file" value="$(find turtlebot_highlevel_movement)/maps/piller.yaml"/>
   <arg name="initial_pose_x" default="2.0"/>
   <arg name="initial_pose_y" default="2.0"/>
   <arg name="initial_pose_a" default="0.0"/>
@@ -78,13 +78,13 @@
 
 
   <!--  **************** Visualisation ****************  -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_highlevel_controller)/config/config.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_highlevel_movement)/config/config.rviz"/>
 
-  <node pkg="turtlebot_highlevel_controller" type="turtlebot_highlevel_processing" name="turtlebot_highlevel_processing" output="screen">
-    <rosparam command="load" file="$(find turtlebot_highlevel_controller)/config/default.yaml" />
+  <node pkg="turtlebot_highlevel_processing" type="turtlebot_highlevel_processing" name="turtlebot_highlevel_processing" output="screen">
+    <rosparam command="load" file="$(find turtlebot_highlevel_processing)/config/default.yaml" />
   </node>
 
-  <node pkg="turtlebot_highlevel_controller" type="turtlebot_highlevel_movement" name="turtlebot_highlevel_movement" output="screen">
-    <rosparam command="load" file="$(find turtlebot_highlevel_controller)/config/default.yaml" />
+  <node pkg="turtlebot_highlevel_movement" type="turtlebot_highlevel_movement" name="turtlebot_highlevel_movement" output="screen">
+    <rosparam command="load" file="$(find turtlebot_highlevel_movement)/config/default.yaml" />
   </node>
 </launch>
