@@ -31,40 +31,28 @@ bool TurtlebotWallDetection::readParameters()
 void TurtlebotWallDetection::topicCallback(const sensor_msgs::LaserScan& message)
 {
   std::vector<float> ranges = message.ranges;
-
-  float min_element = message.range_max;
-  int min_index = 0;
-  for(int i = 0; i < ranges.size(); i++)
-  {
-    if(ranges[i] < min_element)
-    {
-      min_element = ranges[i];
-      min_index = i;
-    }
-  }
-
-  float angle = message.angle_min + min_index * message.angle_increment;
+  float min_value = *std::min_element(ranges.begin(), ranges.end());
 
   turtlebot_highlevel_controller::TransportMessage msg;
-
   msg.header.seq = this->message_sequence_id_;
   msg.header.stamp = ros::Time(0);
   msg.header.frame_id = "base_laser_link";
 
-  if (min_element < 5.0) {
-    msg.move.linear.x = 0.1;
+  if (min_value > 0.5) {
+    msg.move.linear.x = 0.25;
+    msg.move.angular.z = 0.0;
   } else {
     msg.move.linear.x = 0.0;
+    msg.move.angular.z = 0.25;
   }
 
   msg.move.linear.y = 0.0;
   msg.move.linear.z = 0.0;
   msg.move.angular.x = 0.0;
   msg.move.angular.y = 0.0;
-  msg.move.angular.z = angle;
 
-  msg.marker_pose.position.x = cos(angle) * min_element;
-  msg.marker_pose.position.y = sin(angle) * min_element;
+  msg.marker_pose.position.x = 0.0;
+  msg.marker_pose.position.y = 0.0;
   msg.marker_pose.position.z = 0.0;
   msg.marker_pose.orientation.x = 0.0;
   msg.marker_pose.orientation.y = 0.0;

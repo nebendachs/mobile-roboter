@@ -4,7 +4,6 @@
 #include <sensor_msgs/LaserScan.h>
 #include <turtlebot_highlevel_controller/TransportMessage.h>
 #include <string>
-#include <math.h>
 
 namespace turtlebot_highlevel_controller {
 

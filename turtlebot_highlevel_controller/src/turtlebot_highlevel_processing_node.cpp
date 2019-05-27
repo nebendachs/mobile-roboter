@@ -4,7 +4,7 @@
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "turtlebot_highlevel_processing");
-  ros::NodeHandle nodeHandle;
+  ros::NodeHandle nodeHandle("~");
 
   turtlebot_highlevel_controller::TurtlebotHighlevelProcessing turtlebotHighlevelProcessing(nodeHandle);
 
