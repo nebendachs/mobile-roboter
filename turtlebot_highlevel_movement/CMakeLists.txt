@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(turtlebot_highlevel_controller)
+project(turtlebot_highlevel_movement)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -35,28 +35,15 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(turtlebot_highlevel_processing
-  src/turtlebot_highlevel_processing_node.cpp
-  src/TurtlebotHighlevelProcessing.cpp
-)
-
-add_dependencies(turtlebot_highlevel_processing
-  ${catkin_EXPORTED_TARGETS}
-)
-
-target_link_libraries(turtlebot_highlevel_processing
-  ${catkin_LIBRARIES}
-)
-
-add_executable(turtlebot_highlevel_movement
-  src/turtlebot_highlevel_movement_node.cpp
+add_executable(${PROJECT_NAME}
+  src/${PROJECT_NAME}_node.cpp
   src/TurtlebotHighlevelMovement.cpp
 )
 
-add_dependencies(turtlebot_highlevel_movement
+add_dependencies(${PROJECT_NAME}
   ${catkin_EXPORTED_TARGETS}
 )
 
-target_link_libraries(turtlebot_highlevel_movement
+target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
