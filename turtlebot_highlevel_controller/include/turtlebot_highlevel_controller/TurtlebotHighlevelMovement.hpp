@@ -7,11 +7,11 @@
 
 namespace turtlebot_highlevel_controller {
 
-class TurtlebotHighlevelController
+class TurtlebotHighlevelMovement
 {
  public:
-  TurtlebotHighlevelController(ros::NodeHandle& nodeHandle);
-  virtual ~TurtlebotHighlevelController();
+  TurtlebotHighlevelMovement(ros::NodeHandle& nodeHandle);
+  virtual ~TurtlebotHighlevelMovement();
 
  private:
   bool readParameters();

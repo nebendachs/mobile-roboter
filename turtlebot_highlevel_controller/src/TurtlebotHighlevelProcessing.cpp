@@ -1,25 +1,25 @@
-#include "turtlebot_highlevel_controller/TurtlebotHighlevelController.hpp"
+#include "turtlebot_highlevel_controller/TurtlebotHighlevelProcessing.hpp"
 #include <string>
 
 namespace turtlebot_highlevel_controller {
 
-TurtlebotHighlevelController::TurtlebotHighlevelController(ros::NodeHandle& nodeHandle)
+TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(ros::NodeHandle& nodeHandle)
     : nodeHandle_(nodeHandle)
 {
   if (!readParameters()) {
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
-  subscriber_ = nodeHandle_.subscribe(subscriberTopic_, 1, &TurtlebotHighlevelController::topicCallback, this);
+  subscriber_ = nodeHandle_.subscribe(subscriberTopic_, 1, &TurtlebotHighlevelProcessing::topicCallback, this);
   publisher_ = nodeHandle_.advertise<geometry_msgs::Twist>(publisherTopic_, 1);
   ROS_INFO("Successfully launched node.");
 }
 
-TurtlebotHighlevelController::~TurtlebotHighlevelController()
+TurtlebotHighlevelProcessing::~TurtlebotHighlevelProcessing()
 {
 }
 
-bool TurtlebotHighlevelController::readParameters()
+bool TurtlebotHighlevelProcessing::readParameters()
 {
   if (!nodeHandle_.getParam("subsciber_topic", subscriberTopic_)) return false;
   if (!nodeHandle_.getParam("publisher_topic", publisherTopic_)) return false;
@@ -27,7 +27,7 @@ bool TurtlebotHighlevelController::readParameters()
   return true;
 }
 
-void TurtlebotHighlevelController::topicCallback(const sensor_msgs::LaserScan& message)
+void TurtlebotHighlevelProcessing::topicCallback(const sensor_msgs::LaserScan& message)
 {
   std::vector<float> ranges = message.ranges;
   std::vector<float> intensities = message.intensities;
