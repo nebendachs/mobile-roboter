@@ -1,7 +1,7 @@
-#include "turtlebot_highlevel_controller/TurtlebotHighlevelProcessing.hpp"
+#include "turtlebot_highlevel_processing/TurtlebotHighlevelProcessing.hpp"
 
 
-namespace turtlebot_highlevel_controller {
+namespace turtlebot_highlevel_processing {
 
 TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(ros::NodeHandle& nodeHandle)
     : nodeHandle_(nodeHandle)
@@ -11,7 +11,7 @@ TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(ros::NodeHandle& node
     ros::requestShutdown();
   }
   subscriber_ = nodeHandle_.subscribe(subscriberTopic_, this->queueSize_, &TurtlebotHighlevelProcessing::topicCallback, this);
-  transportPublisher_ = nodeHandle_.advertise<turtlebot_highlevel_controller::TransportMessage>(transportTopic_, 1);
+  transportPublisher_ = nodeHandle_.advertise<geometry_msgs::Twist>(transportTopic_, 1);
   message_sequence_id_ = 0;
   ROS_INFO("Successfully launched node.");
 }
@@ -45,7 +45,7 @@ void TurtlebotHighlevelProcessing::topicCallback(const sensor_msgs::LaserScan& m
 
   float angle = message.angle_min + min_index * message.angle_increment;
 
-  turtlebot_highlevel_controller::TransportMessage msg;
+  turtlebot_highlevel_processing::TransportMessage msg;
 
   msg.header.seq = this->message_sequence_id_;
   msg.header.stamp = ros::Time(0);
@@ -75,4 +75,3 @@ void TurtlebotHighlevelProcessing::topicCallback(const sensor_msgs::LaserScan& m
 }
 
 }
-
