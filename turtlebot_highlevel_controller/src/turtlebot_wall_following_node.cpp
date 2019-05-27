@@ -4,7 +4,7 @@
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "turtlebot_wall_following");
-  ros::NodeHandle nodeHandle;
+  ros::NodeHandle nodeHandle("~");
 
   turtlebot_highlevel_controller::TurtlebotWallFollowing turtlebotWallFollowing(nodeHandle);
 

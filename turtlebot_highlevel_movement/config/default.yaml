@@ -1,4 +1,0 @@
-subsciber_topic: "/scan"
-transport_topic: "/transport"
-movement_topic: "/mobile_base/commands/velocity"
-queue_size: 100
