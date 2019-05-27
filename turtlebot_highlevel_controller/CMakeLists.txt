@@ -48,16 +48,6 @@ add_executable(turtlebot_highlevel_movement
   src/TurtlebotHighlevelMovement.cpp
 )
 
-add_executable(turtlebot_wall_detection
-  src/turtlebot_wall_detection_node.cpp
-  src/TurtlebotWallDetection.cpp
-)
-
-add_executable(turtlebot_wall_following
-  src/turtlebot_wall_following_node.cpp
-  src/TurtlebotWallFollowing.cpp
-)
-
 
 
 add_dependencies(turtlebot_highlevel_processing
@@ -65,14 +55,6 @@ add_dependencies(turtlebot_highlevel_processing
 )
 
 add_dependencies(turtlebot_highlevel_movement
-  ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
-)
-
-add_dependencies(turtlebot_wall_detection
-  ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
-)
-
-add_dependencies(turtlebot_wall_following
   ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
 )
 
@@ -86,11 +68,4 @@ target_link_libraries(turtlebot_highlevel_movement
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(turtlebot_wall_detection
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(turtlebot_wall_following
-  ${catkin_LIBRARIES}
-)
 
