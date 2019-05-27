@@ -1,6 +1,9 @@
-#include "turtlebot_highlevel_controller/TurtlebotHighlevelMovement.hpp"
+#include "turtlebot_highlevel_movement/TurtlebotHighlevelMovement.hpp"
+#include <string>
+#include <visualization_msgs/Marker.h>
+#include <math.h>
 
-namespace turtlebot_highlevel_controller {
+namespace turtlebot_highlevel_movement {
 
 TurtlebotHighlevelMovement::TurtlebotHighlevelMovement(ros::NodeHandle& nodeHandle)
     : nodeHandle_(nodeHandle), tfListener_(tfBuffer_)
@@ -66,7 +69,7 @@ void TurtlebotHighlevelMovement::placeMarker(std::string frame_id, float x, floa
   markerPublisher_.publish(marker);
 }
 
-void TurtlebotHighlevelMovement::topicCallback(const turtlebot_highlevel_controller::TransportMessage& message)
+void TurtlebotHighlevelMovement::topicCallback(const turtlebot_highlevel_movement::TransportMessage& message)
 {
   float lx = message.move.linear.x;
 	float ly = message.move.linear.y;
@@ -96,4 +99,3 @@ void TurtlebotHighlevelMovement::topicCallback(const turtlebot_highlevel_control
 }
 
 }
-

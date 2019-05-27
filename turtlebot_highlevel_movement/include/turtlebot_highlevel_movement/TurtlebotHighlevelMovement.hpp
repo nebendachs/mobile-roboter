@@ -5,12 +5,11 @@
 #include <geometry_msgs/Twist.h>
 #include <tf2_ros/transform_listener.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
-#include "turtlebot_highlevel_controller/TransportMessage.h"
 #include <string>
 #include <visualization_msgs/Marker.h>
-#include <math.h>
+#include "turtlebot_highlevel_movement/TransportMessage.h"
 
-namespace turtlebot_highlevel_controller {
+namespace turtlebot_highlevel_movement {
 
 class TurtlebotHighlevelMovement
 {
@@ -22,7 +21,7 @@ class TurtlebotHighlevelMovement
   bool readParameters();
   void moveRobot(float lx, float ly, float lz, float ax, float ay, float az);
   void placeMarker(std::string frame_id, float x, float y, float z);
-  void topicCallback(const turtlebot_highlevel_controller::TransportMessage& message);
+  void topicCallback(const turtlebot_highlevel_movement::TransportMessage& message);
 
   ros::NodeHandle& nodeHandle_;
   ros::Subscriber subscriber_;
@@ -35,4 +34,3 @@ class TurtlebotHighlevelMovement
 };
 
 }
-
