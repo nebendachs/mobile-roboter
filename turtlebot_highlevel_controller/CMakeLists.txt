@@ -13,6 +13,11 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 )
 
+add_message_files(
+  FILES
+  TransportMessage.msg
+)
+
 add_action_files(
   DIRECTORY 
     action 
@@ -59,10 +64,23 @@ add_executable(turtlebot_highlevel_movement
   src/TurtlebotHighlevelMovement.cpp
 )
 
+add_executable(turtlebot_highlevel_client
+  src/turtlebot_highlevel_client_node.cpp
+  src/TurtlebotHighlevelClient.cpp
+)
+
 
 
 add_dependencies(turtlebot_highlevel_processing
-  ${catkin_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
+)
+
+add_dependencies(turtlebot_highlevel_movement
+  ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
+)
+
+add_dependencies(turtlebot_highlevel_client
+  ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp
 )
 
 
@@ -75,4 +93,7 @@ target_link_libraries(turtlebot_highlevel_movement
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(turtlebot_highlevel_client
+  ${catkin_LIBRARIES}
+)
 

@@ -6,26 +6,23 @@
 #include <string>
 #include <math.h>
 #include <turtlebot_highlevel_controller/ReachTargetAction.h>
-#include <actionlib/client/simple_action_client.h>
+#include <actionlib/server/simple_action_server.h>
 
 namespace turtlebot_highlevel_controller {
 
-typedef actionlib::SimpleActionClient<turtlebot_highlevel_controller::ReachTargetAction> Client;
-
 class TurtlebotHighlevelProcessing
 {
- public:
-  TurtlebotHighlevelProcessing(ros::NodeHandle& nodeHandle, std::string actionName);
-  void doAction(const geometry_msgs::Twist& message);
-  void doCallback(const actionlib::SimpleClientGoalState& state, const ReachTargetResultConstPtr& result);
-  virtual ~TurtlebotHighlevelProcessing();
+ protected:
+  ros::NodeHandle nodeHandle_;
+  actionlib::SimpleActionServer<turtlebot_highlevel_controller::ReachTargetAction> actionServer_;
+  std::string actionName_;
+  turtlebot_highlevel_controller::ReachTargetFeedback feedback_;
+  turtlebot_highlevel_controller::ReachTargetResult result_;
 
- private:
-  ros::NodeHandle& nodeHandle_;
-  bool readParameters();
-  Client actionClient_;
-  ros::Subscriber subscriber_;
-  std::string subscriberTopic_;
+ public:
+  TurtlebotHighlevelProcessing(std::string actionName);
+  void execute(const turtlebot_highlevel_controller::ReachTargetGoalConstPtr& goal);
+  virtual ~TurtlebotHighlevelProcessing();
 };
 
 }
