@@ -3,15 +3,17 @@
 namespace turtlebot_highlevel_controller {
 
 TurtlebotHighlevelMovement::TurtlebotHighlevelMovement(std::string actionName)
-    : as_(nodeHandle_, actionName, boost::bind(&TurtlebotHighlevelMovement::execute, this, _1), false), actionName_(actionName)
+    : actionServer_(nodeHandle_, actionName, boost::bind(&TurtlebotHighlevelMovement::execute, this, _1), false), actionName_(actionName)
 {
+
   if (!readParameters()) {
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
   movementPublisher_ = nodeHandle_.advertise<geometry_msgs::Twist>(movementTopic_, 1);
   markerPublisher_ = nodeHandle_.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-  as_.start();
+
+  actionServer_.start();
   ROS_INFO("Successfully launched server.");
 }
 
@@ -27,7 +29,9 @@ bool TurtlebotHighlevelMovement::readParameters()
 
 void TurtlebotHighlevelMovement::execute(const turtlebot_highlevel_controller::ReachTargetGoalConstPtr& goal)
 {
-  as_.setSucceeded();
+  // Unpack goal and call moveRobot with parameters, while loop until goal is reached.
+  ROS_INFO("execute()");
+  actionServer_.setSucceeded();
 }
 
 void TurtlebotHighlevelMovement::moveRobot(float lx, float ly, float lz, float ax, float ay, float az)

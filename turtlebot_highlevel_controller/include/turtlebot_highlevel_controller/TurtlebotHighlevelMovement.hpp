@@ -17,7 +17,7 @@ class TurtlebotHighlevelMovement
 {
  protected:
   ros::NodeHandle nodeHandle_;
-  actionlib::SimpleActionServer<turtlebot_highlevel_controller::ReachTargetAction> as_;
+  actionlib::SimpleActionServer<turtlebot_highlevel_controller::ReachTargetAction> actionServer_;
   std::string actionName_;
   turtlebot_highlevel_controller::ReachTargetFeedback feedback_;
   turtlebot_highlevel_controller::ReachTargetResult result_;
