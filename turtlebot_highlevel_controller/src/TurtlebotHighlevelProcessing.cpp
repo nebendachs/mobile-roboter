@@ -2,20 +2,37 @@
 
 namespace turtlebot_highlevel_controller {
 
-TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(std::string actionName, bool flag)
+typedef actionlib::SimpleActionClient<turtlebot_highlevel_controller::ReachTargetAction> Client;
+
+TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(ros::NodeHandle& nodeHandle, std::string actionName): actionClient_(actionName, true), nodeHandle_(nodeHandle)
 {
-  actionlib::SimpleActionClient<turtlebot_highlevel_controller::ReachTargetAction> client(actionName, flag);
-  ROS_INFO("Successfully launched client.");
-  ROS_INFO("Wait for Server...");
-  client.waitForServer();
+  if (!readParameters()) {
+    ROS_ERROR("Could not read parameters.");
+    ros::requestShutdown();
+  }
+  subscriber_ = nodeHandle_.subscribe(subscriberTopic_, 1, &TurtlebotHighlevelProcessing::doAction, this);
+
+  ROS_INFO("Waiting for action server to start...");
+  actionClient_.waitForServer();
+  ROS_INFO("...action server started.");
+}
+
+TurtlebotHighlevelProcessing::~TurtlebotHighlevelProcessing()
+{
+}
+
+bool TurtlebotHighlevelProcessing::readParameters()
+{
+  if (!nodeHandle_.getParam("action_topic", subscriberTopic_)) return false;
+  return true;
+}
+
+void TurtlebotHighlevelProcessing::doAction(const geometry_msgs::Twist& message)
+{
+  ROS_INFO("Build goal.");
   turtlebot_highlevel_controller::ReachTargetGoal goal;
 
-  goal.move.linear.x = 0.0;
-  goal.move.linear.y = 0.0;
-  goal.move.linear.z = 0.0;
-  goal.move.angular.x = 0.0;
-  goal.move.angular.y = 0.0;
-  goal.move.angular.z = 0.0;
+  goal.move = message;
 
   goal.marker_pose.position.x = 0.0;
   goal.marker_pose.position.y = 0.0;
@@ -24,18 +41,17 @@ TurtlebotHighlevelProcessing::TurtlebotHighlevelProcessing(std::string actionNam
   goal.marker_pose.orientation.y = 0.0;
   goal.marker_pose.orientation.z = 0.0;
 
-  client.sendGoal(goal);
-  client.waitForResult(ros::Duration(5.0));
-
-  if (client.getState() == actionlib::SimpleClientGoalState::SUCCEEDED) {
-    ROS_INFO("Reached goal.");
-  } else {
-    printf("Current State: %s\n", client.getState().toString().c_str());
-  }
+  ROS_INFO("Send goal.");
+  actionClient_.sendGoal(goal,
+			boost::bind(&TurtlebotHighlevelProcessing::doCallback, this, _1, _2),
+			Client::SimpleActiveCallback(),
+			Client::SimpleFeedbackCallback());
 }
 
-TurtlebotHighlevelProcessing::~TurtlebotHighlevelProcessing()
+void TurtlebotHighlevelProcessing::doCallback(const actionlib::SimpleClientGoalState& state, const ReachTargetResultConstPtr& result)
 {
+  ROS_INFO("Finished in state [%s]", state.toString().c_str());
+  ROS_INFO("Answer: %i", result->finished);
 }
 
 }

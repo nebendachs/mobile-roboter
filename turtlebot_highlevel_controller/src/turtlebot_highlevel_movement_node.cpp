@@ -3,9 +3,9 @@
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "turtlebot_highlevel_server");
+  ros::init(argc, argv, "turtlebot_highlevel_movement");
 
-  turtlebot_highlevel_controller::TurtlebotHighlevelMovement turtlebotHighlevelMovement("ReachGoal");
+  turtlebot_highlevel_controller::TurtlebotHighlevelMovement turtlebotHighlevelMovement("ReachTarget");
 
   ros::spin();
   return 0;
