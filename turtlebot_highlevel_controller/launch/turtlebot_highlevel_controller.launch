@@ -15,8 +15,8 @@
   <!-- Name of the map to use (without path nor extension) and initial position -->
   <arg name="world_file" value="$(find turtlebot_highlevel_controller)/maps/apartment.world"/>
   <arg name="map_file" value="$(find turtlebot_highlevel_controller)/maps/apartment.yaml"/>
-  <arg name="initial_pose_x" default="2.0"/>
-  <arg name="initial_pose_y" default="2.0"/>
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
   <arg name="initial_pose_a" default="0.0"/>
 
   <param name="/use_sim_time" value="true"/>
@@ -64,10 +64,13 @@
   <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
 
   <!--  ****** Maps *****  -->
+<!--
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
     <param name="frame_id" value="/map"/>
   </node>
+ -->
 
+<!--
   <include file="$(find turtlebot_navigation)/launch/includes/amcl/amcl.launch.xml">
     <arg name="scan_topic" value="scan"/>
     <arg name="use_map_topic" value="true"/>
@@ -75,7 +78,7 @@
     <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
   </include>
-
+-->
 
   <!--  **************** Visualisation ****************  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_highlevel_controller)/config/config.rviz"/>
