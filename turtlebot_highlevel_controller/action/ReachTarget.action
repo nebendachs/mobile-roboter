@@ -1,5 +1,5 @@
 geometry_msgs/Point target
 ---
-bool finished
+float32 finished_distance
 ---
-float32 distance
+float32 remaining_distance

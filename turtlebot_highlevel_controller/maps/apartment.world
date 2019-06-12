@@ -1,4 +1,4 @@
-include "turtlebot.inc"
+include "turtlebot_with_laser.inc"
 
 define floorplan model
 (
@@ -29,8 +29,8 @@ window
 
 floorplan
 (
-  name "piller"
-  bitmap "piller.png"
+  name "apartment"
+  bitmap "apartment.png"
   size [ 10.0 10.0 2.0 ]
   pose [  5.0  5.0 0.0 0.0 ]
 )

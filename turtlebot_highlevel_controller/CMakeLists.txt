@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   TransportMessage.msg
+  ActionMessage.msg
 )
 
 add_action_files(

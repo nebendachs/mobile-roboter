@@ -2,7 +2,7 @@
 
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
-#include <geometry_msgs/Point.h>
+#include <turtlebot_highlevel_controller/ActionMessage.h>
 #include <string>
 #include <math.h>
 #include <turtlebot_highlevel_controller/ReachTargetAction.h>
@@ -16,8 +16,10 @@ class TurtlebotHighlevelClient
 {
  public:
   TurtlebotHighlevelClient(ros::NodeHandle& nodeHandle, std::string actionName);
-  void doAction(const geometry_msgs::Point& message);
-  void doCallback(const actionlib::SimpleClientGoalState& state, const ReachTargetResultConstPtr& result);
+  void doAction(const turtlebot_highlevel_controller::ActionMessage& message);
+  void doDoneCallback(const actionlib::SimpleClientGoalState& state, const ReachTargetResultConstPtr& result);
+  void doActiveCallback();
+  void doFeedbackCallback(const ReachTargetFeedbackConstPtr& feedback);
   virtual ~TurtlebotHighlevelClient();
 
  private:
@@ -25,6 +27,7 @@ class TurtlebotHighlevelClient
   Client actionClient_;
   ros::Subscriber subscriber_;
   std::string subscriberTopic_;
+  bool active_goal_;
 };
 
 }
