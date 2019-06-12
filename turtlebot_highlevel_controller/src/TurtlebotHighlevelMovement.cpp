@@ -3,16 +3,16 @@
 namespace turtlebot_highlevel_controller {
 
 TurtlebotHighlevelMovement::TurtlebotHighlevelMovement(ros::NodeHandle& nodeHandle)
-    : nodeHandle_(nodeHandle), tfListener_(tfBuffer_)
+    : nodeHandle_(nodeHandle)
 {
   if (!readParameters()) {
-    ROS_ERROR("Could not read parameters.");
+    ROS_ERROR("NODE: Could not read parameters.");
     ros::requestShutdown();
   }
   subscriber_ = nodeHandle_.subscribe(subscriberTopic_, 1, &TurtlebotHighlevelMovement::topicCallback, this);
   movementPublisher_ = nodeHandle_.advertise<geometry_msgs::Twist>(movementTopic_, 1);
   markerPublisher_ = nodeHandle_.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-  ROS_INFO("Successfully launched node.");
+  ROS_INFO("NODE: Successfully launched node.");
 }
 
 TurtlebotHighlevelMovement::~TurtlebotHighlevelMovement()
@@ -81,18 +81,7 @@ void TurtlebotHighlevelMovement::topicCallback(const turtlebot_highlevel_control
   std::string tf_frame = message.header.frame_id;
 
   this->moveRobot(lx, ly, lz, ax, ay, az);
-
-  geometry_msgs::TransformStamped transform;
-  tf2::Stamped<tf2::Transform> tf2;
-  tf2::Vector3 point(x, y, z);
-  try {
-    transform = tfBuffer_.lookupTransform("odom", tf_frame, ros::Time(0));
-    tf2::convert(transform, tf2);
-    tf2::Vector3 new_point = tf2 * point;
-    placeMarker("odom", new_point[0], new_point[1], new_point[2]);
-  } catch (tf2::TransformException &exception) {
-    ROS_WARN("%s", exception.what());
-  }
+  this->placeMarker(tf_frame, x, y, z);
 }
 
 }
