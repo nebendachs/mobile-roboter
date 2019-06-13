@@ -7,7 +7,7 @@
 `rosrun gmapping slam_gmapping scan:=/scan _odom_frame:=odom`
 
 3. Rosbag-file abspielen:
-`rosbag play bagfiles/mapping.bag`
+`rosbag play mapping.bag`
 
 4. Nachdem 3. fertig ist Karte unter /maps speichern:
 `rosrun map_server map_saver -f gmapping_map_rosbag`
