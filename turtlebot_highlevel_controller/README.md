@@ -1,14 +1,10 @@
-## Uebung02
 
-1. Stage starten:
-`roslaunch turtlebot_highlevel_controller turtlebot_in_stage_htwg_2.launch`
+## Uebung 4.7
+1. Launch-file ausführen.
+`roslaunch turtlebot_highlevel_controller turtlebot_highlevel_controller.launch`
 
-2. Keyboard starten:
-`rosrun teleop_twist_keyboard teleop_twist_keyboard.py`
+2. Mit RVIZ ein 2D Goal setzen.
 
-## Uebung03
-1. `roslaunch turtlebot_highlevel_controller turtlebot_in_stage_htwg_2.launch`
+[Screenshots](https://github.com/nebendachs/mobile-roboter/tree/task7/turtlebot_highlevel_controller/imgs)
 
-[Screenshots](https://github.com/nebendachs/mobile-roboter/tree/master/turtlebot_highlevel_controller/imgs)
-
-![Image1](https://github.com/nebendachs/mobile-roboter/blob/master/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-05-24%2013-28-37.png "Image 1")
+![Image1](https://github.com/nebendachs/mobile-roboter/blob/task7/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2010-53-32.png "Image 1")
