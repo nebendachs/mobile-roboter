@@ -16,7 +16,7 @@ Hinweis: Der Roboter ist auf den Screenshots nicht zu sehen.
 
 [Screenshots](https://github.com/nebendachs/mobile-roboter/tree/task5/turtlebot_highlevel_controller/imgs)
 
-![Image0](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-29-18.png"Image 0")
+![Image0](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-29-18.png "Image 0")
 
 ![Image1](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-11-36.png "Image 1")
 
