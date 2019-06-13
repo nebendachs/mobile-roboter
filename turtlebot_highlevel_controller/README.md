@@ -6,6 +6,8 @@
 2. Einen Map-server mit der Karte starten:
 `rosrun map_server map_server gmapping_map.yaml`
 
+3. Bewegen(z.b. über 2D Goal setzen in RVIZ)
+
 [Screenshots](https://github.com/nebendachs/mobile-roboter/tree/task4/turtlebot_highlevel_controller/imgs)
 
 ![Image0](https://github.com/nebendachs/mobile-roboter/blob/task4/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-32-06.png "Image 0")
