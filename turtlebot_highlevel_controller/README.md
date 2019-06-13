@@ -3,7 +3,7 @@
 1. Launch-file ausführen.
 `roslaunch turtlebot_highlevel_controller turtlebot_highlevel_controller.launch`
 
-2. gmapping starten:
+2. Einen Map-server mit der Karte starten:
 `rosrun map_server map_server gmapping_map.yaml`
 
 [Screenshots](https://github.com/nebendachs/mobile-roboter/tree/task4/turtlebot_highlevel_controller/imgs)
