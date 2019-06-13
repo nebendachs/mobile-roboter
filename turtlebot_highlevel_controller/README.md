@@ -17,18 +17,18 @@
 ![Image0](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-37-42.png "Image 0")
 
 ![Image1](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-37-47.png "Image 1")
-
-Nach Befehl 2:
+Befehl 1 beendet.
+Nach Befehl 2.
 ![Image2](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-40-32.png "Image 2")
 
 ![Image3](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-40-28.png "Image 3")
 
 ![Image4](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-40-44.png "Image 4")
-
-Nach Befehl 3:
+Befehl 2 beendet.
+Nach Befehl 3.
 ![Image5](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-42-48.png "Image 5")
 
-Nach Befehl 4:
+Nach Befehl 4.
 ![Image6](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-43-10.png "Image 6")
 
 ![Image7](https://github.com/nebendachs/mobile-roboter/blob/task2/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2013-43-05.png "Image 7")
