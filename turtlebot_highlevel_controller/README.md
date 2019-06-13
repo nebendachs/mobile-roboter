@@ -18,12 +18,12 @@ Hinweis: Der Roboter ist auf den Screenshots nicht zu sehen.
 
 ![Image0](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/maps/gmapping_map_rosbag.pgm "Image 0")
 
-![Image1](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2010-50-08.png "Image 1")
+![Image1](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-11-36.png "Image 1")
 
-![Image2](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2010-50-17.png "Image 2")
+![Image2](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-11-47.png "Image 2")
 
-![Image3](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2010-50-24.png "Image 3")
+![Image3](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-11-47.png "Image 3")
 
-![Image4](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2010-50-31.png "Image 4")
+![Image4](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-12-24.png "Image 4")
 
-![Image5](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2010-50-38.png "Image 5")
+![Image5](https://github.com/nebendachs/mobile-roboter/blob/task5/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-12-34.png "Image 5")
