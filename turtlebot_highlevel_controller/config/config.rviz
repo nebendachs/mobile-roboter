@@ -616,7 +616,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: false
           Value: false
-      Enabled: false
+      Enabled: true
       Name: Local Planning
     - Class: rviz/Group
       Displays:
@@ -653,7 +653,7 @@ Visualization Manager:
           Topic: /move_base/DWAPlannerROS/global_plan
           Unreliable: false
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Global Planning
     - Alpha: 1
       Axes Length: 1
