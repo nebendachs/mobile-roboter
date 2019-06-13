@@ -2,3 +2,4 @@ teleop_twist_keyboard/
 turtlebot_simulator/
 ros_best_practices/
 laser_geometry/
+turtlebot_highlevel_controller/bagfiles/*
