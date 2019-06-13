@@ -11,7 +11,7 @@
 4. Nachdem Karte ganz erkannt:
 `rosrun map_server map_saver -f gmapping_map`
 
-[Screenshots](https://github.com/nebendachs/mobile-roboter/tree/task4/turtlebot_highlevel_controller/imgs)
+[Screenshots](https://github.com/nebendachs/mobile-roboter/tree/task3/turtlebot_highlevel_controller/imgs)
 
 ![Image0](https://github.com/nebendachs/mobile-roboter/blob/task4/turtlebot_highlevel_controller/imgs/Bildschirmfoto%20vom%202019-06-13%2011-32-06.png "Image 0")
 
