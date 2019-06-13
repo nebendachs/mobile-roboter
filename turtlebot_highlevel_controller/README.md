@@ -1,7 +1,7 @@
 ## Uebung 4.4
 
 1. Launch-file ausführen.
-`roslaunch turtlebot_highlevel_controller turtlebot_highlevel_controller_rosbag.launch`
+`roslaunch turtlebot_highlevel_controller turtlebot_highlevel_controller.launch`
 
 2. gmapping starten:
 `rosrun map_server map_server gmapping_map.yaml`
